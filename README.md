@@ -4,6 +4,7 @@
 
 - Git - [Download & Install Git](https://git-scm.com/downloads).
 - Node.js - [Download & Install Node.js](https://nodejs.org/en/download/) and the npm package manager.
+- Docker - [Download & Install Docker](https://www.docker.com/products/docker-desktop/).
 
 ## Downloading
 
@@ -15,6 +16,26 @@ git clone {repository URL}
 
 ```
 npm install
+```
+
+###  Running application using docker
+1. Clone repository
+
+```
+git clone https://github.com/iharaleynikau/nodejs2024Q1-service.git
+```
+
+3. Install NPM packages
+
+```
+npm install
+```
+
+4. Create `.env` file based on `.env.example`.
+
+5. Run application using docker
+```
+docker-compose up --build
 ```
 
 ## Running application
