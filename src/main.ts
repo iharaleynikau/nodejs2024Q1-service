@@ -5,6 +5,8 @@ import 'dotenv/config';
 import { readFileSync } from 'fs';
 import { parse } from 'yaml';
 import { AppModule } from './app.module';
+import { LoggingService } from './logger/logger.service';
+import { getExceptionHandler } from './logger/exceptionHandler';
 
 const bootstrap = async () => {
   const app = await NestFactory.create(AppModule);
@@ -19,7 +21,18 @@ const bootstrap = async () => {
     }),
   );
 
+  const logger = await app.resolve(LoggingService);
+
+  app.useLogger(logger);
+  getExceptionHandler(logger);
+
   await app.listen(process.env.PORT || 4000);
+
+  logger.log(`Server is running on port: ${process.env.PORT}`);
 };
 
-bootstrap();
+bootstrap().catch((err) => {
+  console.error(`An unexpected error occurred: ${err.message}`);
+
+  process.exit(1);
+});
