@@ -9,11 +9,14 @@ import {
   Param,
   ParseUUIDPipe,
   HttpStatus,
+  UseGuards,
 } from '@nestjs/common';
 import { Album } from 'src/types';
 import { CreateAlbumDTO, UpdateAlbumDTO } from './album.dto';
 import { AlbumService } from './album.service';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
+@UseGuards(JwtAuthGuard)
 @Controller('/album')
 export class AlbumController {
   constructor(private readonly albumService: AlbumService) {}

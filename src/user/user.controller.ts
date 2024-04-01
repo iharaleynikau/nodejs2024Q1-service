@@ -9,14 +9,16 @@ import {
   Param,
   ParseUUIDPipe,
   HttpStatus,
-  ValidationPipe,
   UseInterceptors,
+  UseGuards,
 } from '@nestjs/common';
 import { ExcludePasswordInterceptor } from './exclude.interceptor';
 import { User } from 'src/types';
 import { CreateUserDTO, UpdateUserPasswordDTO } from './user.dto';
 import { UserService } from './user.service';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
+@UseGuards(JwtAuthGuard)
 @Controller('/user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
