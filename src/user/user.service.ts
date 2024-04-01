@@ -26,6 +26,16 @@ export class UserService {
     return user;
   }
 
+  async getSingleUserByLogin(login: string): Promise<User> {
+    const user = await this.prisma.user.findFirst({
+      where: { login },
+    });
+
+    if (user) {
+      return user;
+    }
+  }
+
   async createUser(body: CreateUserDTO): Promise<User> {
     return await this.prisma.user.create({
       data: {

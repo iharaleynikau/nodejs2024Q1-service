@@ -7,10 +7,13 @@ import {
   Param,
   ParseUUIDPipe,
   Post,
+  UseGuards,
 } from '@nestjs/common';
 import { FavoritesResponse } from 'src/types';
 import { FavoritesService } from './favorites.service';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
+@UseGuards(JwtAuthGuard)
 @Controller('favs')
 export class FavoritesController {
   constructor(private favoriteService: FavoritesService) {}
